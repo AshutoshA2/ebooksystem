@@ -1,0 +1,186 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Jul 29, 2025 at 05:49 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `ebook-app`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_dtls`
+--
+
+CREATE TABLE `book_dtls` (
+  `bookId` int(11) NOT NULL,
+  `bookname` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `price` varchar(50) NOT NULL,
+  `bookCategory` varchar(100) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `book_dtls`
+--
+
+INSERT INTO `book_dtls` (`bookId`, `bookname`, `author`, `price`, `bookCategory`, `status`, `photo`, `email`) VALUES
+(6, 'Ashtosh', 'Ashtosh', '100', 'New', 'Active', 'shoes_2.png', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_order`
+--
+
+CREATE TABLE `book_order` (
+  `id` int(11) NOT NULL,
+  `order_id` varchar(100) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `phno` varchar(20) NOT NULL,
+  `book_name` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `price` varchar(100) NOT NULL,
+  `payment` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `book_order`
+--
+
+INSERT INTO `book_order` (`id`, `order_id`, `user_name`, `email`, `address`, `phno`, `book_name`, `author`, `price`, `payment`) VALUES
+(1, 'BOOK-ORD-0086', 'ashtosh', 'ashtosh@gmail.com', 'itahari', '98122222', 'Ashutosh', 'ashtosh', '123.0 ', 'COD');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `bookName` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `price` double NOT NULL,
+  `total_price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cid`, `bid`, `uid`, `bookName`, `author`, `price`, `total_price`) VALUES
+(2, 1, 1, 'ashtosh', 'john', 123, 123),
+(9, 6, 8, 'Ashtosh', 'Ashtosh', 100, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phno` varchar(15) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `address` text DEFAULT NULL,
+  `landmark` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `pincode` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `phno`, `password`, `address`, `landmark`, `city`, `state`, `pincode`) VALUES
+(1, 'john', 'admin@gmail.com', '98122222', '$2a$10$7OMUWBJ1ddjdM5p8zKBY9e4XqjM4YmDuUvY5YJfZVVDZyR.RJH1H6', NULL, NULL, NULL, NULL, NULL),
+(7, 'ak', 'ak@gmail.com', '98122222', '$2a$10$3RQBokIGcdL4wQNQOlQoOuZMBrDC4BWvw203mO3hwjZUfmfUBX/lW', NULL, NULL, NULL, NULL, NULL),
+(8, 'ashtosh', 'ashtosh@gmail.com', '9853464545', '$2a$10$JOuZU72U0DQfAr6miu.uQud0D00llLrdWPl5fvtEZvOE1qJ3DqgxW', NULL, NULL, NULL, NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `book_dtls`
+--
+ALTER TABLE `book_dtls`
+  ADD PRIMARY KEY (`bookId`);
+
+--
+-- Indexes for table `book_order`
+--
+ALTER TABLE `book_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cid`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `book_dtls`
+--
+ALTER TABLE `book_dtls`
+  MODIFY `bookId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `book_order`
+--
+ALTER TABLE `book_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
